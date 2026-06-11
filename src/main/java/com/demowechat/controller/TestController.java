@@ -3,15 +3,12 @@ package com.demowechat.controller;
 import com.demowechat.service.TestService;
 import com.demowechat.service.impl.TestServiceImpl;
 import com.demowechat.service.impl.TestServiceImpl2;
-import com.demowechat.test.Animal;
+import com.demowechat.data.Animal;
 import com.demowechat.util.EmailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.security.PublicKey;
 
 @RestController
 @RequestMapping("/test")

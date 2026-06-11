@@ -1,6 +1,6 @@
-package com.demowechat.test;
+package com.demowechat.data;
 
-public class Dog extends Animal{
+public class Dog extends Animal {
     @Override
     public void eat(){
         System.out.println("重写狗在吃");

@@ -1,6 +1,6 @@
-package com.demowechat.test;
+package com.demowechat.data;
 
-public class Cat extends  Animal{
+public class Cat extends Animal {
 
     @Override
     public void eat(){

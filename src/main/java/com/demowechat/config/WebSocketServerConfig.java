@@ -1,4 +1,4 @@
-package com.demowechat.test;
+package com.demowechat.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

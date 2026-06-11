@@ -1,4 +1,4 @@
-package com.demowechat.test;
+package com.demowechat.data;
 
 import org.springframework.stereotype.Component;
 

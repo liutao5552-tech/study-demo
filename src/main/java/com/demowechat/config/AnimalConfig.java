@@ -1,5 +1,8 @@
-package com.demowechat.test;
+package com.demowechat.config;
 
+import com.demowechat.data.Animal;
+import com.demowechat.data.Cat;
+import com.demowechat.data.Dog;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 @Configuration
