@@ -124,6 +124,9 @@ public class TestData {
 
     public static void main(String[] args) throws  Exception{
         freeMarker();
+
+
+        System.out.println("Hello World!");
     }
 
 
