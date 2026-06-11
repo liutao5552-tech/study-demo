@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>微信扫一扫</title>
+
+    <!-- 微信JS-SDK -->
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<button id="but" onclick="scanQRCode()">点击扫一扫</button>
+<span id="textContent"></span>
+
+<button onclick="testRequst()">点击</button>
+
+<script>
+    $(function () {
+        const url = window.location.href.split('#')[0]; // 获取当前页面URL，去掉hash部分
+        $.ajax({
+            url: 'https://liutao5552.xyz/wechat/signature', // 后端接口地址
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ url: url}), // 传递当前页面URL
+            success: function (response) {
+                console.log(response)
+                wx.config({
+                    debug: false,
+                    appId: response.appId,
+                    timestamp: response.timestamp,
+                    nonceStr: response.nonceStr,
+                    signature: response.signature,
+                    jsApiList: ['scanQRCode']
+                });
+
+                wx.error(function (res) {
+                    alert(JSON.stringify(res))
+                });
+            },
+            error: function (err) {
+                console.error("获取微信签名失败", err);
+            }
+        });
+
+
+        let id=1001
+        const ws = new WebSocket("ws://localhost:8080/ws/"+id);
+
+        ws.onopen = () => {
+            console.log("连接成功");
+            ws.send("你好服务器");
+        };
+
+        ws.onmessage = (msg) => {
+            console.log("收到消息:", msg.data);
+        };
+    });
+
+
+    function scanQRCode() {
+        alert("开始扫码");
+
+        wx.scanQRCode({
+            needResult: 1,
+            scanType: ["qrCode", "barCode"],
+            success: function (res) {
+                $("#textContent").text(res.resultStr)
+            }
+        });
+    }
+
+    function testRequst(){
+        $.ajax({
+            url: '/wechat/test',
+            method: 'GET',
+            success: function (res) {
+                console.log(res)
+            }
+        })
+    }
+</script>
+
+
+
+
+
+
+
+
+
+<div class="box">
+    <span>A</span>
+    <input>
+    <div>C</div>
+    <button onclick="getEl(this)">点击</button>
+</div>
+
+<script>
+    function getEl(el) {
+        console.log($(el))
+        console.log($(el).prev())
+        console.log($(el).parent())
+        console.log($(el).closest(".box"))
+        console.log($(el).siblings())
+        console.log($(el).siblings().addBack())
+    }
+</script>
+
+</body>
+</html>
