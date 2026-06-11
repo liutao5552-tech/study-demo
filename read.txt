@@ -1,0 +1,10 @@
+File:能拿到文件的属性信息
+InputStream:能拿到文件内容
+OutputStream:可以修改文件内容
+
+
+@Override:可以在多个类里重写实现同一个方法接口的不同的逻辑,也可以在继承父类后重写里面的方法,重写后需要:Animal dog=new Dog();
+@Transactional:最好在Service里面用,private 方法不会生效,在try-catch里异常被 try-catch 吃掉,
+成员变量需要把对象new出来才能调用,静态变量可以直接调用
+@Componet:写在类名上,表示把这个对象交给spring管理
+@Bean:写在方法上,表示把返回的对象交给spring管理,可以重写父类逻辑后,把重写某些方法后的父类返回给spring 注意需要配合@Configuration才能生效重写方法的逻辑

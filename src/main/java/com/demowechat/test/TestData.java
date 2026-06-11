@@ -1,16 +1,20 @@
 package com.demowechat.test;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+
+import java.io.*;
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 public class TestData {
+
+    //压缩
     public static void compressed() throws Exception{
         //拿到文件输入流
         FileInputStream fileInputStream=new FileInputStream("C:/Users/Administrator/Desktop/壁报.ppt");
@@ -38,6 +42,7 @@ public class TestData {
         fileInputStream.close();
     }
 
+    //解压
     public static void uncompressed() throws Exception {
 
         String zipPath = "C:/Users/Administrator/Desktop/test.zip";
@@ -83,8 +88,42 @@ public class TestData {
         zipFile.close();
     }
 
+
+    //模版生成
+    public static void freeMarker() throws Exception{
+
+        // 1. 配置 FreeMarker
+        Configuration cfg = new Configuration(Configuration.VERSION_2_3_32);
+        cfg.setDirectoryForTemplateLoading(new File("templates")); // 模板目录
+        cfg.setDefaultEncoding("UTF-8");
+
+        // 2. 获取模板
+        Template template = cfg.getTemplate("user.ftl");
+
+        // 3. 构造数据模型（后端数据）
+        Map<String, Object> user = new HashMap<>();
+        user.put("name", "张三");
+        user.put("age", 50);
+        user.put("email", "zhangsan@gmail.com");
+        user.put("showEmail", true);
+        user.put("role", "admin");
+
+        Map<String, Object> dataModel = new HashMap<>();
+        dataModel.put("user", user);
+
+        // 4. 输出文件
+        Writer out = new FileWriter("out/output.html");
+
+        // 5. 生成 HTML
+        template.process(dataModel, out);
+
+        out.close();
+
+        System.out.println("HTML生成完成！");
+    }
+
     public static void main(String[] args) throws  Exception{
-        uncompressed();
+        freeMarker();
     }
 
 
